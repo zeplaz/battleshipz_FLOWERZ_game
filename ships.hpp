@@ -61,16 +61,35 @@
 
   };
 
-class Battleship : public ships
-{
-  private :
-  int ship_size = 4;
+  class Aircraft_Carrier : public ships
+    {
+      private :
+      int ship_size = 5;
 
-  public :
-  virtual void set_location (char (*matrix)[collum]);
-  virtual std::vector<int> rad_loc_placer();
-};
+      public :
+      virtual void set_location (char (*matrix)[collum]);
+      virtual std::vector<int> rad_loc_placer();
+    };
 
+  class Battleship : public ships
+  {
+    private :
+    int ship_size = 4;
+
+    public :
+    virtual void set_location (char (*matrix)[collum]);
+    virtual std::vector<int> rad_loc_placer();
+  };
+
+  class Submarine : public ships
+  {
+    private :
+    int ship_size = 3;
+
+    public :
+    virtual void set_location (char (*matrix)[collum]);
+    virtual std::vector<int> rad_loc_placer();
+  };
 
 
 /*

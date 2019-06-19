@@ -11,8 +11,8 @@
       std::cin >> c_rotate;
       std::cout << '\n';
 
-      if(!(c_rotate =='y'))
-        { rotation = false;}
+      if(c_rotate =='y')
+        { rotation = true;}
       else
         {
           std::cin.clear();
@@ -60,9 +60,13 @@
 
   void Battleship::set_location(char (*matrix)[collum])
   {
-    int x, y;
-    if(!AI_Ship)
-    {
+
+   int x, y;
+   if(!AI_Ship)
+     {
+      bool vaild_location= false;
+      while(!vaild_location)
+      {
         std::cout << "set Ship Location and Orintation" << '\n';
         rotate();
         std::cout <<"input x and y location for front of ship";
@@ -77,31 +81,57 @@
            std::cin.clear();
            std::cin.ignore(10000, '\n');
         }
-
         else
-        {
-          location[0] = x;
-          location[1] = y;
-
-          if(get_Rotation())
           {
-            for (int i =0; i < ship_size; i++)
+            location[0] = x;
+            location[1] = y;
+
+            if(get_Rotation())
             {
+              for (int i =0; i < ship_size; i++)
+              {
+                if (matrix[x][y+i]=='p')
+                {
+                 std::cout << "your ship crosses another ship NOT VAILD" << '\n';
+                 vaild_location= false;
+                 break;
+                }
+               vaild_location= true;
+              }
+             }
+             if(!get_Rotation())
+             {
+               for (int i =0; i < ship_size; i++)
+               {
+                 if(matrix[x+i][y] == 'p')
+                 {
+                  std::cout << "your ship crosses another ship NOT VAILD" << '\n';
+                  vaild_location= false;
+                  break;
+                 }
+                vaild_location= true;
+               }
+              }
+            }
+          }//end of while found a vaild location
+          if(vaild_location)
+          {
+            if(get_Rotation())
+            { std::cout << "rotatedship! being placed!" << '\n';
+              for (int i =0; i < ship_size; i++)
+              {
                matrix[x][y+i] = 'p';
+              }
             }
-          }
-
-          else
-          {
-            for (int i =0; i < ship_size; i++)
+              if(!get_Rotation())
             {
-              matrix[x+i][y] = 'p';
+              for (int i =0; i < ship_size; i++)
+              {
+                matrix[x+i][y] = 'p';
+              }
             }
-          }
-
-         }
-
-     }//end of player setup
+           }
+         }//end of player setup
      //ai setup
      else
      { std::cout <<"LOading AI ship LOCATIONz" << '\n';

@@ -7,10 +7,12 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
 {
   switch (shiptype)
     {
-      /*
+
     case aircraft_carrier :
+
+
     break;
-    */
+
 
     case battleship :
     Battleship*  prt_AC =  new Battleship();

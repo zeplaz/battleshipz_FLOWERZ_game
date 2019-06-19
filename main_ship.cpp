@@ -45,17 +45,16 @@ int main(int argc, char* argv[])
 
       g_board.clear();
       g_board.create_user_ships();
-      g_board.show();
-      std::cout << "------------------------" << '\n';
       g_board.create_AI_ships();
-      g_board.show(); // Shows AI Board (Testing Feature only)*
+      //g_board.show();
+      //g_board.show(); // Shows AI Board (Testing Feature only)*
       std::cout << "------------------------" << '\n';
       // setshipsuser();
       // show();
       int pos1, pos2;
 
       while (1)
-      {
+      {   g_board.show();
           std::cout << "Please input Location To attack (X then Y):";
           std::cin >> pos1 >> pos2; // Asking player where to "fire"
           if (pos1 < 0 || pos1>row || pos2 < 0 || pos2>collum)

@@ -19,7 +19,8 @@ class game_board
   //const char Pship = 's'; //Displayed where a player places a ship
   int maxship = 5;
    //Sets Max # of ships on AI board
-  char matrix[row][collum]; //*
+  char user_matrix[row][collum];
+  char AI_marrix[row][collum]; //*
   const int shipnum = 5;
   std::vector<ships*> user_ship_vec;
   std::vector<ships*> AI_ship_vec;
@@ -54,7 +55,8 @@ class game_board
     {
         for (int j = 0; j < collum; j++)
         {
-            matrix[i][j] = '0';
+            user_matrix[i][j] = '0';
+            AI_marrix[i][j]   = '0';
         }
 
     }
@@ -67,10 +69,23 @@ inline void show()
   {
       for (int j = 0; j < collum; j++)
       {
-          std::cout << matrix[i][j] << " ";
+          std::cout << user_matrix[i][j] << " ";
       }
       std::cout << '\n';
-  }
+    }
+
+    std::cout << "------------------------" << '\n';
+/*
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < collum; j++)
+        {
+          std::cout << AI_marrix[i][j] << " ";
+        }
+      std::cout << '\n';
+     }
+
+    std::cout << "------------------------" << '\n'; */
 }
 
  inline int enemy_ships_remain()
@@ -80,7 +95,7 @@ inline void show()
       {
         for (int j = 0; j < collum; j++)
          {
-           if (matrix[i][j] == '3') //
+           if (AI_marrix[i][j] == '3') //
             c++;
          }
        }
@@ -90,9 +105,9 @@ inline void show()
 
 inline bool attack(int x, int y)
 {
-  if (matrix[x][y] == '3')
+  if (AI_marrix[x][y] == '3')
   {
-      matrix[x][y] = 'x';
+      AI_marrix[x][y] = 'x';
       return true;
   }
   return false;
