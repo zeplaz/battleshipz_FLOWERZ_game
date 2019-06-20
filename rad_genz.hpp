@@ -2,7 +2,7 @@
 
 
 class rad_genz {
-    
+
     private :
 
     std::mt19937 gen_;
@@ -30,4 +30,15 @@ gen_(seed);
   std::random_device seeder;
   auto run_gen();
 
-};*/
+};
+
+
+    //std::uniform_int_distribution<int>dis_r(0,row);
+    //std::uniform_int_distribution<int>dis_r2(0,row-ship_size);
+    //std::uniform_int_distribution<int>dis_c(0,collum);
+  //  std::uniform_int_distribution<int>dis_c2(0,collum-ship_size);
+  //  auto gen1 = std::bind(dis_r,eng);
+  //  auto gen2 =std::bind(dis_r2,eng);
+  //  auto gen3 =std::bind(dis_c,eng);
+  //  auto gen4 =std::bind(dis_c2,eng);
+*/

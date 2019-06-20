@@ -74,9 +74,9 @@
 
     virtual void rotate();
 
-    virtual std::vector<int> rad_loc_placer();
+    virtual std::vector<int> rad_loc_placer()=0;
 
-    virtual void set_location (char (*matrix)[collum]);
+    virtual void set_location (char (*matrix)[collum])=0;
 
   };
 
@@ -86,6 +86,8 @@
       int ship_size = 5;
 
       public :
+      virtual std::vector<int> rad_loc_placer();
+      virtual void set_location (char (*matrix)[collum]);
 
     };
 
@@ -95,6 +97,8 @@
     int ship_size = 4;
 
     public :
+    virtual std::vector<int> rad_loc_placer();
+    virtual void set_location (char (*matrix)[collum]);
 
   };
 
@@ -104,7 +108,9 @@
     int ship_size = 3;
 
     public :
-    ;
+    virtual std::vector<int> rad_loc_placer();
+    virtual void set_location (char (*matrix)[collum]);
+
   };
 
 

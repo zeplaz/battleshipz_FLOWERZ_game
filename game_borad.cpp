@@ -29,11 +29,11 @@ void game_board::create_AI_ships()
 {
   int ship_type;
   ship_type=2;// cuz only class setup!
-  ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-  ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-  ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-  ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-  ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-  ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-  ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
+  //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
+  ship_fac(1,&AI_ship_vec,AI_marrix,true);
+  ship_fac(2,&AI_ship_vec,AI_marrix,true);
+  ship_fac(3,&AI_ship_vec,AI_marrix,true);
+  //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
+  //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
+  //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
 }

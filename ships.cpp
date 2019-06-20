@@ -28,19 +28,14 @@
    }
 
 
-  std::vector<int> ships::rad_loc_placer()
+
+   /////////////////////////////////Aircraft_Carrier
+
+
+  std::vector<int> Aircraft_Carrier::rad_loc_placer()
   {
     std::vector<int> locxy;
     std::cout <<"loading random AI battlehsip" << '\n';
-
-    //std::uniform_int_distribution<int>dis_r(0,row);
-    //std::uniform_int_distribution<int>dis_r2(0,row-ship_size);
-    //std::uniform_int_distribution<int>dis_c(0,collum);
-  //  std::uniform_int_distribution<int>dis_c2(0,collum-ship_size);
-  //  auto gen1 = std::bind(dis_r,eng);
-  //  auto gen2 =std::bind(dis_r2,eng);
-  //  auto gen3 =std::bind(dis_c,eng);
-  //  auto gen4 =std::bind(dis_c2,eng);
 
     if(get_Rotation())
     {
@@ -57,9 +52,10 @@
     return {locxy};
   }
 
-  void ships::set_location(char (*matrix)[collum])
-  {
 
+
+  void Aircraft_Carrier::set_location(char (*matrix)[collum])
+  {
    int x, y;
    if(!AI_Ship)
      {
@@ -202,11 +198,341 @@
       }
   }
 
+/////////////////////////////////Battleship
+
+std::vector<int> Battleship::rad_loc_placer()
+{
+  std::vector<int> locxy;
+  std::cout <<"loading random AI battlehsip" << '\n';
+
+  if(get_Rotation())
+  {
+    locxy.push_back(rad_rowH());
+    locxy.push_back(rad_col());
+    std::cout <<"ailoc horz: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
+  }
+  else
+  {
+    locxy.push_back(rad_row());
+    locxy.push_back(rad_colH());
+    std::cout <<"ailoc: vert: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
+  }
+  return {locxy};
+}
 
 
 
+void Battleship::set_location(char (*matrix)[collum])
+{
+ int x, y;
+ if(!AI_Ship)
+   {
+    bool vaild_location= false;
+    while(!vaild_location)
+    {
+      std::cout << "set Ship Location and Orintation" << '\n';
+      rotate();
+      std::cout <<"input x and y location for front of ship";
+      std::cin >> x >> y;
+      std::cout << '\n';
+
+      if (x<0 || x>row || y<0 || y>collum ||
+         (get_Rotation() && y+ship_size >collum)||
+         (!get_Rotation() && x+ship_size >row))
+      {
+         std::cout <<  "ERROR invaild point" << '\n';
+         std::cin.clear();
+         std::cin.ignore(10000, '\n');
+      }
+      else
+        {
+          location[0] = x;
+          location[1] = y;
+
+          if(get_Rotation())
+          {
+            for (int i =0; i < ship_size; i++)
+            {
+              if (matrix[x][y+i]=='p')
+              {
+               std::cout << "your ship crosses another ship NOT VAILD" << '\n';
+               vaild_location= false;
+               break;
+              }
+             vaild_location= true;
+            }
+           }
+           if(!get_Rotation())
+           {
+             for (int i =0; i < ship_size; i++)
+             {
+               if(matrix[x+i][y] == 'p')
+               {
+                std::cout << "your ship crosses another ship NOT VAILD" << '\n';
+                vaild_location= false;
+                break;
+               }
+              vaild_location= true;
+             }
+            }
+          }
+        }//end of while found a vaild location
+        if(vaild_location)
+        {
+          if(get_Rotation())
+          { std::cout << "rotatedship! being placed!" << '\n';
+            for (int i =0; i < ship_size; i++)
+            {
+             matrix[x][y+i] = 'p';
+            }
+          }
+            if(!get_Rotation())
+          {
+            for (int i =0; i < ship_size; i++)
+            {
+              matrix[x+i][y] = 'p';
+            }
+          }
+         }
+       }//end of player setup
+   //ai setup
+   if(AI_Ship)
+   {
+     std::cout <<"LOading AI ship LOCATIONz" << '\n';
+     bool vaild_location= false;
+     int round=0;
+     while (!vaild_location)
+     {
+       round++;
+       std::cout << "seeking vaild round: " << round << '\n';
+       std::vector<int> locxy;
+       rotate();
+       locxy = rad_loc_placer();
+
+       if (!(locxy.at(0)>row || locxy.at(1)>collum ||
+          (get_Rotation() &&  locxy.at(1)+ship_size >collum)||
+          (!get_Rotation() && locxy.at(0)+ship_size >row)))
+        {
+          std::cout <<"in vaild locplacer" <<'\n';
+          location[0] = locxy.at(0);
+          location[1] = locxy.at(1);
+
+          if(get_Rotation())
+          {
+            for (int i =0; i < ship_size; i++)
+            { if(matrix[location[0]][location[1]+i] == '3')
+             {
+               vaild_location = false;
+               std::cout << "ai_ship_interscted reserching.." <<"\n";
+               break;
+             }
+             vaild_location = true;
+            }
+          }
+          else
+          {
+            for (int i =0; i < ship_size; i++)
+            {
+             if(matrix[location[0]+i][location[1]] == '3')
+              {
+               vaild_location = false;
+               std::cout << "ai_ship_interscted reserching.." <<"\n";
+               break;
+              }
+             vaild_location = true;
+            }
+          }
+
+          if(vaild_location)
+          {
+            if(get_Rotation())
+            {
+              for (int i =0; i < ship_size; i++)
+              {
+                 matrix[location[0]][location[1]+i] = '3';
+              }
+            }
+            else
+            {
+              for (int i =0; i < ship_size; i++)
+              {
+                matrix[location[0]+i][location[1]] = '3';
+              }
+            }
+            std::cout << "Vaild location found ship Placed!" << '\n';
+          }
+        }
+      }
+    }
+}
+
+/////////////////////////////////Submarine
+
+std::vector<int> Submarine::rad_loc_placer()
+{
+  std::vector<int> locxy;
+  std::cout <<"loading random AI battlehsip" << '\n';
+
+  if(get_Rotation())
+  {
+    locxy.push_back(rad_rowH());
+    locxy.push_back(rad_col());
+    std::cout <<"ailoc horz: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
+  }
+  else
+  {
+    locxy.push_back(rad_row());
+    locxy.push_back(rad_colH());
+    std::cout <<"ailoc: vert: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
+  }
+  return {locxy};
+}
 
 
+
+void Submarine::set_location(char (*matrix)[collum])
+{
+ int x, y;
+ if(!AI_Ship)
+   {
+    bool vaild_location= false;
+    while(!vaild_location)
+    {
+      std::cout << "set Ship Location and Orintation" << '\n';
+      rotate();
+      std::cout <<"input x and y location for front of ship";
+      std::cin >> x >> y;
+      std::cout << '\n';
+
+      if (x<0 || x>row || y<0 || y>collum ||
+         (get_Rotation() && y+ship_size >collum)||
+         (!get_Rotation() && x+ship_size >row))
+      {
+         std::cout <<  "ERROR invaild point" << '\n';
+         std::cin.clear();
+         std::cin.ignore(10000, '\n');
+      }
+      else
+        {
+          location[0] = x;
+          location[1] = y;
+
+          if(get_Rotation())
+          {
+            for (int i =0; i < ship_size; i++)
+            {
+              if (matrix[x][y+i]=='p')
+              {
+               std::cout << "your ship crosses another ship NOT VAILD" << '\n';
+               vaild_location= false;
+               break;
+              }
+             vaild_location= true;
+            }
+           }
+           if(!get_Rotation())
+           {
+             for (int i =0; i < ship_size; i++)
+             {
+               if(matrix[x+i][y] == 'p')
+               {
+                std::cout << "your ship crosses another ship NOT VAILD" << '\n';
+                vaild_location= false;
+                break;
+               }
+              vaild_location= true;
+             }
+            }
+          }
+        }//end of while found a vaild location
+        if(vaild_location)
+        {
+          if(get_Rotation())
+          { std::cout << "rotatedship! being placed!" << '\n';
+            for (int i =0; i < ship_size; i++)
+            {
+             matrix[x][y+i] = 'p';
+            }
+          }
+            if(!get_Rotation())
+          {
+            for (int i =0; i < ship_size; i++)
+            {
+              matrix[x+i][y] = 'p';
+            }
+          }
+         }
+       }//end of player setup
+   //ai setup
+   if(AI_Ship)
+   {
+     std::cout <<"LOading AI ship LOCATIONz" << '\n';
+     bool vaild_location= false;
+     int round=0;
+     while (!vaild_location)
+     {
+       round++;
+       std::cout << "seeking vaild round: " << round << '\n';
+       std::vector<int> locxy;
+       rotate();
+       locxy = rad_loc_placer();
+
+       if (!(locxy.at(0)>row || locxy.at(1)>collum ||
+          (get_Rotation() &&  locxy.at(1)+ship_size >collum)||
+          (!get_Rotation() && locxy.at(0)+ship_size >row)))
+        {
+          std::cout <<"in vaild locplacer" <<'\n';
+          location[0] = locxy.at(0);
+          location[1] = locxy.at(1);
+
+          if(get_Rotation())
+          {
+            for (int i =0; i < ship_size; i++)
+            { if(matrix[location[0]][location[1]+i] == '3')
+             {
+               vaild_location = false;
+               std::cout << "ai_ship_interscted reserching.." <<"\n";
+               break;
+             }
+             vaild_location = true;
+            }
+          }
+          else
+          {
+            for (int i =0; i < ship_size; i++)
+            {
+             if(matrix[location[0]+i][location[1]] == '3')
+              {
+               vaild_location = false;
+               std::cout << "ai_ship_interscted reserching.." <<"\n";
+               break;
+              }
+             vaild_location = true;
+            }
+          }
+
+          if(vaild_location)
+          {
+            if(get_Rotation())
+            {
+              for (int i =0; i < ship_size; i++)
+              {
+                 matrix[location[0]][location[1]+i] = '3';
+              }
+            }
+            else
+            {
+              for (int i =0; i < ship_size; i++)
+              {
+                matrix[location[0]+i][location[1]] = '3';
+              }
+            }
+            std::cout << "Vaild location found ship Placed!" << '\n';
+          }
+        }
+      }
+    }
+}
 
 /*
 
