@@ -2,7 +2,7 @@
 
 
 class rad_genz {
-    // random seed by default
+    
     private :
 
     std::mt19937 gen_;
@@ -10,9 +10,7 @@ class rad_genz {
     std::random_device seeder;
 
     public:
-    /*  ... some convenient ctors ... */
-
-    rad_genz(size_t min, size_t max,unsigned int seed = std::random_device{}())
+      rad_genz(size_t min, size_t max,unsigned int seed = std::random_device{}())
         : gen_{seed}, dist_{min, max}
           {
 

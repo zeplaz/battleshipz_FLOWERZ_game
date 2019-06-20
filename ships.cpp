@@ -28,7 +28,7 @@
    }
 
 
-  std::vector<int> Battleship::rad_loc_placer()
+  std::vector<int> ships::rad_loc_placer()
   {
     std::vector<int> locxy;
     std::cout <<"loading random AI battlehsip" << '\n';
@@ -57,7 +57,7 @@
     return {locxy};
   }
 
-  void Battleship::set_location(char (*matrix)[collum])
+  void ships::set_location(char (*matrix)[collum])
   {
 
    int x, y;

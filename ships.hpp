@@ -30,6 +30,7 @@
     bool rotation;
     bool AI_Ship;
     bool alive;
+    int numberofhits;
 
     //genratorezrad
     rad_genz randomgen_bool{0,1};
@@ -73,9 +74,9 @@
 
     virtual void rotate();
 
-    virtual std::vector<int> rad_loc_placer() = 0;
+    virtual std::vector<int> rad_loc_placer();
 
-    virtual void set_location (char (*matrix)[collum]) = 0;
+    virtual void set_location (char (*matrix)[collum]);
 
   };
 
@@ -85,8 +86,7 @@
       int ship_size = 5;
 
       public :
-      virtual void set_location (char (*matrix)[collum]);
-      virtual std::vector<int> rad_loc_placer();
+
     };
 
   class Battleship : public ships
@@ -95,8 +95,7 @@
     int ship_size = 4;
 
     public :
-    virtual void set_location (char (*matrix)[collum]);
-    virtual std::vector<int> rad_loc_placer();
+
   };
 
   class Submarine : public ships
@@ -105,8 +104,7 @@
     int ship_size = 3;
 
     public :
-    virtual void set_location (char (*matrix)[collum]);
-    virtual std::vector<int> rad_loc_placer();
+    ;
   };
 
 
