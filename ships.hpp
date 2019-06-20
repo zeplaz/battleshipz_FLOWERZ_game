@@ -6,6 +6,8 @@
 #include <vector>
 #include <random>
 #include <functional>
+#include <random>
+#include "rad_genz.hpp"
 
  namespace Battle_Shipz
    {
@@ -19,6 +21,8 @@
 
   class ships
   {
+    private :
+    int ship_size = 0;
     protected :
 
     int  id;
@@ -26,16 +30,30 @@
     bool rotation;
     bool AI_Ship;
     bool alive;
+
+    //genratorezrad
+    rad_genz randomgen_bool{0,1};
+    rad_genz rad_row{0,row};
+    rad_genz rad_rowH{0,row-ship_size};
+    rad_genz rad_col{0,collum};
+    rad_genz rad_colH{0,collum-ship_size};
+
+//distrabutions
+
+
+
     public :
-    std::random_device seeder;
 
     virtual ~ships() =  default ;
 
     inline virtual bool bool_radom()
     {
-      auto gen = std::bind(std::uniform_int_distribution<>(0,1),
-                        std::default_random_engine());
-      return gen();
+      return randomgen_bool();
+
+      //auto gen = std::bind(std::uniform_int_distribution<int>(0,1),
+        //                std::default_random_engine());
+
+    //  return gen();
     }
 
     inline virtual void set_id()

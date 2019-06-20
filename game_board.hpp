@@ -75,7 +75,7 @@ inline void show()
     }
 
     std::cout << "------------------------" << '\n';
-/*
+
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < collum; j++)
@@ -85,7 +85,7 @@ inline void show()
       std::cout << '\n';
      }
 
-    std::cout << "------------------------" << '\n'; */
+    std::cout << "------------------------" << '\n'; 
 }
 
  inline int enemy_ships_remain()
