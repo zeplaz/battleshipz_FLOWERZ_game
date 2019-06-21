@@ -2,6 +2,8 @@
 #pragma once
 
 #include <vector>
+#include <forward_list>
+
 
 #include "ships.hpp"
 #include "ship_factory.hpp"
@@ -26,6 +28,9 @@ class game_board
   std::vector<ships*> AI_ship_vec;
   ship_factory ship_fac;
 
+
+  //std::forward_list<agents>  agent_list;
+  //lamadas for probality agent diesion mekimsn,
   public :
 
   void create_user_ships();
@@ -85,7 +90,7 @@ inline void show()
       std::cout << '\n';
      }
 
-    std::cout << "------------------------" << '\n'; 
+    std::cout << "------------------------" << '\n';
 }
 
  inline int enemy_ships_remain()

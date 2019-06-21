@@ -2,6 +2,9 @@
 
 #include "ships.hpp"
 
+
+int ships::next_ship_id = 0;
+
   void ships::rotate()
   {
     if(!AI_Ship)
@@ -40,12 +43,12 @@
     if(get_Rotation())
     {
       locxy.push_back(rad_rowH());
-      locxy.push_back(rad_col());
+      locxy.push_back(ojk_ship_placr.rad_col());
       std::cout <<"ailoc horz: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
     }
     else
     {
-      locxy.push_back(rad_row());
+      locxy.push_back(ojk_ship_placr.rad_row());
       locxy.push_back(rad_colH());
       std::cout <<"ailoc: vert: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
     }
@@ -85,7 +88,7 @@
             {
               for (int i =0; i < ship_size; i++)
               {
-                if (matrix[x][y+i]=='p')
+                if (matrix[x][y+i]!='0')
                 {
                  std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                  vaild_location= false;
@@ -98,7 +101,7 @@
              {
                for (int i =0; i < ship_size; i++)
                {
-                 if(matrix[x+i][y] == 'p')
+                 if(matrix[x+i][y] != '0')
                  {
                   std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                   vaild_location= false;
@@ -115,14 +118,18 @@
             { std::cout << "rotatedship! being placed!" << '\n';
               for (int i =0; i < ship_size; i++)
               {
-               matrix[x][y+i] = 'p';
+               matrix[x][y+i] = 'C';
+               ojk_ship_placr.add_obj_points(x,y+i);
+
               }
             }
               if(!get_Rotation())
             {
               for (int i =0; i < ship_size; i++)
               {
-                matrix[x+i][y] = 'p';
+                matrix[x+i][y] = 'C';
+                int tempcord=x+i;
+                ojk_ship_placr.add_obj_points(x+i,y);
               }
             }
            }
@@ -191,7 +198,7 @@
                   matrix[location[0]+i][location[1]] = '3';
                 }
               }
-              std::cout << "Vaild location found ship Placed!" << '\n';
+              std::cout << "Vaild location found ship Placed!" << '\n'<< '\n';
             }
           }
         }
@@ -208,12 +215,12 @@ std::vector<int> Battleship::rad_loc_placer()
   if(get_Rotation())
   {
     locxy.push_back(rad_rowH());
-    locxy.push_back(rad_col());
+    locxy.push_back(ojk_ship_placr.rad_col());
     std::cout <<"ailoc horz: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
   }
   else
   {
-    locxy.push_back(rad_row());
+    locxy.push_back(ojk_ship_placr.rad_row());
     locxy.push_back(rad_colH());
     std::cout <<"ailoc: vert: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
   }
@@ -253,7 +260,7 @@ void Battleship::set_location(char (*matrix)[collum])
           {
             for (int i =0; i < ship_size; i++)
             {
-              if (matrix[x][y+i]=='p')
+              if (matrix[x][y+i]!='0')
               {
                std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                vaild_location= false;
@@ -266,7 +273,7 @@ void Battleship::set_location(char (*matrix)[collum])
            {
              for (int i =0; i < ship_size; i++)
              {
-               if(matrix[x+i][y] == 'p')
+               if(matrix[x+i][y] == '0')
                {
                 std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                 vaild_location= false;
@@ -283,14 +290,16 @@ void Battleship::set_location(char (*matrix)[collum])
           { std::cout << "rotatedship! being placed!" << '\n';
             for (int i =0; i < ship_size; i++)
             {
-             matrix[x][y+i] = 'p';
+             matrix[x][y+i] = 'B';
+             ojk_ship_placr.add_obj_points(x,y+i);
             }
           }
             if(!get_Rotation())
           {
             for (int i =0; i < ship_size; i++)
             {
-              matrix[x+i][y] = 'p';
+              matrix[x+i][y] = 'B';
+              ojk_ship_placr.add_obj_points(x+i,y);
             }
           }
          }
@@ -350,6 +359,8 @@ void Battleship::set_location(char (*matrix)[collum])
               for (int i =0; i < ship_size; i++)
               {
                  matrix[location[0]][location[1]+i] = '3';
+                 ojk_ship_placr.add_obj_points(x,y+i);
+
               }
             }
             else
@@ -357,9 +368,10 @@ void Battleship::set_location(char (*matrix)[collum])
               for (int i =0; i < ship_size; i++)
               {
                 matrix[location[0]+i][location[1]] = '3';
+                ojk_ship_placr.add_obj_points(x+i,y);
               }
             }
-            std::cout << "Vaild location found ship Placed!" << '\n';
+            std::cout << "Vaild location found ship Placed!" << '\n' << '\n';
           }
         }
       }
@@ -371,17 +383,17 @@ void Battleship::set_location(char (*matrix)[collum])
 std::vector<int> Submarine::rad_loc_placer()
 {
   std::vector<int> locxy;
-  std::cout <<"loading random AI battlehsip" << '\n';
+  std::cout <<"loading random AI Submarine" << '\n';
 
   if(get_Rotation())
   {
     locxy.push_back(rad_rowH());
-    locxy.push_back(rad_col());
+    locxy.push_back(ojk_ship_placr.rad_col());
     std::cout <<"ailoc horz: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
   }
   else
   {
-    locxy.push_back(rad_row());
+    locxy.push_back(ojk_ship_placr.rad_row());
     locxy.push_back(rad_colH());
     std::cout <<"ailoc: vert: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
   }
@@ -421,7 +433,7 @@ void Submarine::set_location(char (*matrix)[collum])
           {
             for (int i =0; i < ship_size; i++)
             {
-              if (matrix[x][y+i]=='p')
+              if (matrix[x][y+i]=='0')
               {
                std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                vaild_location= false;
@@ -434,7 +446,7 @@ void Submarine::set_location(char (*matrix)[collum])
            {
              for (int i =0; i < ship_size; i++)
              {
-               if(matrix[x+i][y] == 'p')
+               if(matrix[x+i][y] == '0')
                {
                 std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                 vaild_location= false;
@@ -451,14 +463,17 @@ void Submarine::set_location(char (*matrix)[collum])
           { std::cout << "rotatedship! being placed!" << '\n';
             for (int i =0; i < ship_size; i++)
             {
-             matrix[x][y+i] = 'p';
+             matrix[x][y+i] = 'S';
+             ojk_ship_placr.add_obj_points(x,y+i);
+
             }
           }
             if(!get_Rotation())
           {
             for (int i =0; i < ship_size; i++)
             {
-              matrix[x+i][y] = 'p';
+              matrix[x+i][y] = 'S';
+              ojk_ship_placr.add_obj_points(x+i,y);
             }
           }
          }
@@ -484,6 +499,7 @@ void Submarine::set_location(char (*matrix)[collum])
           std::cout <<"in vaild locplacer" <<'\n';
           location[0] = locxy.at(0);
           location[1] = locxy.at(1);
+
 
           if(get_Rotation())
           {
@@ -518,6 +534,8 @@ void Submarine::set_location(char (*matrix)[collum])
               for (int i =0; i < ship_size; i++)
               {
                  matrix[location[0]][location[1]+i] = '3';
+                 ojk_ship_placr.add_obj_points(x,y+i);
+
               }
             }
             else
@@ -525,9 +543,10 @@ void Submarine::set_location(char (*matrix)[collum])
               for (int i =0; i < ship_size; i++)
               {
                 matrix[location[0]+i][location[1]] = '3';
+                ojk_ship_placr.add_obj_points(x+i,y);
               }
             }
-            std::cout << "Vaild location found ship Placed!" << '\n';
+            std::cout << "Vaild location found ship Placed!" << '\n'<< '\n';
           }
         }
       }

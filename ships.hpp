@@ -5,66 +5,75 @@
 #include <iostream>
 #include <vector>
 #include <random>
-#include <functional>
+//#include <functional>
 #include <random>
-#include "rad_genz.hpp"
+#include <bitset>
+#include <cassert>
 
- namespace Battle_Shipz
-   {
-    #define row 10
-    #define collum 10
-    enum    {aircraft_carrier=1,battleship=2,
-             submarine=3,crusier=4, patrol_boat=5};
-   }
 
-  static int ship_id =0;
+#include "placeable_object_component.hpp"
+
+
+
+using namespace Battle_Shipz;
+
+
 
   class ships
   {
     private :
-    int ship_size = 0;
+    size_t ship_size = 0;
+
     protected :
 
     int  id;
+    static int next_ship_id;
+    //static int be_NextValidID;
     int  location[2];
     bool rotation;
     bool AI_Ship;
     bool alive;
-    int numberofhits;
+    bool disabled;
+
+    //compontelistz
+    placeable_object_component<int> ojk_ship_placr;
+
 
     //genratorezrad
-    rad_genz randomgen_bool{0,1};
-    rad_genz rad_row{0,row};
     rad_genz rad_rowH{0,row-ship_size};
-    rad_genz rad_col{0,collum};
     rad_genz rad_colH{0,collum-ship_size};
-
-//distrabutions
-
-
-
+    //distrabutions
     public :
 
     virtual ~ships() =  default ;
 
-    inline virtual bool bool_radom()
+     ships(int id)
     {
-      return randomgen_bool();
-
-      //auto gen = std::bind(std::uniform_int_distribution<int>(0,1),
-        //                std::default_random_engine());
-
-    //  return gen();
+      set_id(id);
     }
 
-    inline virtual void set_id()
+    inline virtual void set_id(int val)
     {
-      id = ship_id;
-      ship_id++;
+      assert ((val>=next_ship_id)&& "<ships::set_id: broken ID>");
+      id = val;
+      next_ship_id=id+1;
+    }
+
+    inline virtual int get_id()
+    {
+      return id;
+    }
+
+
+    inline virtual bool bool_radom()
+    {
+      return ojk_ship_placr.randomgen_bool();
     }
 
     inline virtual void set_ship_to_AI()
       {AI_Ship = true;}
+      inline virtual void set_ship_to_user()
+        {AI_Ship = false;}
 
     inline virtual bool is_ship_AI()
       {return AI_Ship;}
@@ -83,31 +92,49 @@
   class Aircraft_Carrier : public ships
     {
       private :
-      int ship_size = 5;
+      size_t ship_size = 5;
+      std::bitset<5> damage_model;
 
       public :
+
+      Aircraft_Carrier():ships(next_ship_id){}
+      virtual ~Aircraft_Carrier() = default;
+
       virtual std::vector<int> rad_loc_placer();
       virtual void set_location (char (*matrix)[collum]);
+
 
     };
 
   class Battleship : public ships
   {
     private :
-    int ship_size = 4;
+    size_t ship_size = 4;
+    std::bitset<4> damage_model;
 
     public :
+    Battleship():ships(next_ship_id){}
+
+    virtual ~Battleship() = default;
+
     virtual std::vector<int> rad_loc_placer();
     virtual void set_location (char (*matrix)[collum]);
+
+
 
   };
 
   class Submarine : public ships
   {
     private :
-    int ship_size = 3;
+    size_t ship_size = 3;
+    std::bitset<3> damage_model;
 
     public :
+    Submarine():ships(next_ship_id){}
+
+    virtual ~Submarine() = default;
+
     virtual std::vector<int> rad_loc_placer();
     virtual void set_location (char (*matrix)[collum]);
 
