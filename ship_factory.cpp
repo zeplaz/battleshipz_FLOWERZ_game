@@ -39,6 +39,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
       prt_B->set_location(matrix);
       prt_ship_vec->push_back(prt_B);
       std::cout <<"NEW ai B ID: " << prt_B->get_id() << '\n' << '\n';
+          
     }
     else
     {
@@ -59,6 +60,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
       prt_S->set_location(matrix);
       prt_ship_vec->push_back(prt_S);
       std::cout <<"NEW ai S ID: " << prt_S->get_id() << '\n' << '\n';
+
 
     }
     else

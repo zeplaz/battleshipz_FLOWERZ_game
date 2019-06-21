@@ -36,15 +36,17 @@ class game_board
   void create_user_ships();
   void create_AI_ships();
 
+  void update_board();
+
  ~game_board()
  {
-   for (size_t i = user_ship_vec.size(); i<0; i--)
+   for (size_t i=0; i<user_ship_vec.size(); i++)
     {
       delete[] user_ship_vec.at(i);
       user_ship_vec.pop_back();
     }
 
-    for (size_t i = AI_ship_vec.size(); i<0; i--)
+    for (size_t i = 0; i< AI_ship_vec.size(); i++)
      {
        delete[] AI_ship_vec.at(i);
        AI_ship_vec.pop_back();

@@ -89,6 +89,8 @@ int main(int argc, char* argv[])
         std::cout << "You are out of ships!";
         system("pause");
         }
+        g_board.clear();
+        g_board.update_board();
 
       }// endloop
     }// end if
