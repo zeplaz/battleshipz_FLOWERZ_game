@@ -31,27 +31,25 @@ int ships::next_ship_id = 0;
    }
 
 
-
    /////////////////////////////////Aircraft_Carrier
-
 
   std::vector<int> Aircraft_Carrier::rad_loc_placer()
   {
     std::vector<int> locxy;
-    std::cout <<"loading random AI battlehsip" << '\n';
+    std::cout <<"loading random AI Aircraft_Carrier" << '\n';
 
     if(get_Rotation())
     {
       locxy.push_back(rad_rowH());
       locxy.push_back(ojk_ship_placr.rad_col());
       std::cout <<"ailoc horz: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
-    }
+        }
     else
     {
       locxy.push_back(ojk_ship_placr.rad_row());
       locxy.push_back(rad_colH());
       std::cout <<"ailoc: vert: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
-    }
+        }
     return {locxy};
   }
 
@@ -88,7 +86,7 @@ int ships::next_ship_id = 0;
             {
               for (int i =0; i < ship_size; i++)
               {
-                if (matrix[x][y+i]!='0')
+                if (matrix[location[0]][location[1]+i]!='0')
                 {
                  std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                  vaild_location= false;
@@ -101,7 +99,7 @@ int ships::next_ship_id = 0;
              {
                for (int i =0; i < ship_size; i++)
                {
-                 if(matrix[x+i][y] != '0')
+                 if(matrix[location[0]+i][location[1]] != '0')
                  {
                   std::cout << "your ship crosses another ship NOT VAILD" << '\n';
                   vaild_location= false;
@@ -116,20 +114,18 @@ int ships::next_ship_id = 0;
           {
             if(get_Rotation())
             { std::cout << "rotatedship! being placed!" << '\n';
-              for (int i =0; i < ship_size; i++)
+              for (size_t i =0; i < ship_size; i++)
               {
-               matrix[x][y+i] = 'C';
-               ojk_ship_placr.add_obj_points(x,y+i);
-
+               matrix[location[0]][location[1]+i] = ship_symbl;
+               ojk_ship_placr.add_obj_points(location[0],location[1]+i);
               }
             }
               if(!get_Rotation())
             {
-              for (int i =0; i < ship_size; i++)
+              for (size_t i =0; i < ship_size; i++)
               {
-                matrix[x+i][y] = 'C';
-                int tempcord=x+i;
-                ojk_ship_placr.add_obj_points(x+i,y);
+                matrix[location[0]+i][location[1]] = ship_symbl;
+                ojk_ship_placr.add_obj_points(location[0]+i,location[1]);
               }
             }
            }
@@ -189,6 +185,8 @@ int ships::next_ship_id = 0;
                 for (int i =0; i < ship_size; i++)
                 {
                    matrix[location[0]][location[1]+i] = '3';
+                   ojk_ship_placr.add_obj_points(location[0],location[1]+i);
+
                 }
               }
               else
@@ -196,14 +194,17 @@ int ships::next_ship_id = 0;
                 for (int i =0; i < ship_size; i++)
                 {
                   matrix[location[0]+i][location[1]] = '3';
+                  ojk_ship_placr.add_obj_points(location[0]+i,location[1]);
                 }
               }
-              std::cout << "Vaild location found ship Placed!" << '\n'<< '\n';
+              std::cout << "Vaild location found ship Placed!" << '\n' << '\n';
             }
           }
         }
       }
   }
+
+
 
 /////////////////////////////////Battleship
 
@@ -219,13 +220,13 @@ std::vector<int> Battleship::rad_loc_placer()
     locxy.push_back(rad_rowH());
     locxy.push_back(ojk_ship_placr.rad_col());
     std::cout <<"ailoc horz: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
-  }
+      }
   else
   {
     locxy.push_back(ojk_ship_placr.rad_row());
     locxy.push_back(rad_colH());
     std::cout <<"ailoc: vert: "<< locxy.at(0) << " " << locxy.at(1) << '\n';
-  }
+      }
   return {locxy};
 }
 

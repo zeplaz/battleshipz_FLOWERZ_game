@@ -17,13 +17,14 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
         prt_AC->set_ship_to_AI();
         prt_AC->set_location(matrix);
         prt_ship_vec->push_back(prt_AC);
+        std::cout <<"NEW ai C ID: " << prt_AC->get_id() << '\n' << '\n';
       }
       else
       {
        prt_AC->set_ship_to_user();
        prt_AC->set_location(matrix);
        prt_ship_vec->push_back(prt_AC);
-       //std::cout <<"NEW ai AC ID: " << prt_AC->get_id();
+       std::cout <<"NEW Plater AC ID: " << prt_AC->get_id();
       }
 
      break;
@@ -39,7 +40,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
       prt_B->set_location(matrix);
       prt_ship_vec->push_back(prt_B);
       std::cout <<"NEW ai B ID: " << prt_B->get_id() << '\n' << '\n';
-          
+
     }
     else
     {

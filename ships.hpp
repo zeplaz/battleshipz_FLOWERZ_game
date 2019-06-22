@@ -136,6 +136,8 @@ using namespace Battle_Shipz;
                   std::cout <<"##test.valarrayr_captured vecdata: " << temp[0]
                             <<" "<< temp[1] << '\n';
                   temp = ojk_ship_placr.point_move_vector_addion(to_mov_val_ary,temp);
+                  ojk_ship_placr.obj_locnodez.data()->at(0) =  temp[0];
+                  ojk_ship_placr.obj_locnodez.data()->at(1) =  temp[1];
 
                 }
 
