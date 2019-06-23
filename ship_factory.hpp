@@ -10,5 +10,5 @@ using namespace  Battle_Shipz;
 class ship_factory
   {
     public :
-      void operator() (int shiptype, std::vector<ships*>* prt_ship_vec, char (*matrix)[collum],bool is_AI);
+      ships* operator() (int shiptype, std::vector<ships*>* prt_ship_vec, char (*matrix)[collum],bool is_AI);
   };

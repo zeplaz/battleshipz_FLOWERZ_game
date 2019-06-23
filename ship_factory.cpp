@@ -3,7 +3,7 @@
 #include "ship_factory.hpp"
 
 
-void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, char (*matrix)[collum],bool is_AI)
+ships* ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, char (*matrix)[collum],bool is_AI)
 {
   switch (shiptype)
     {
@@ -18,6 +18,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
         prt_AC->set_location(matrix);
         prt_ship_vec->push_back(prt_AC);
         std::cout <<"NEW ai C ID: " << prt_AC->get_id() << '\n' << '\n';
+        return prt_AC;
       }
       else
       {
@@ -25,6 +26,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
        prt_AC->set_location(matrix);
        prt_ship_vec->push_back(prt_AC);
        std::cout <<"NEW Plater AC ID: " << prt_AC->get_id();
+       return prt_AC;
       }
 
      break;
@@ -40,6 +42,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
       prt_B->set_location(matrix);
       prt_ship_vec->push_back(prt_B);
       std::cout <<"NEW ai B ID: " << prt_B->get_id() << '\n' << '\n';
+      return prt_B;
 
     }
     else
@@ -48,6 +51,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
      prt_B->set_location(matrix);
      prt_ship_vec->push_back(prt_B);
      std::cout <<"NEW player B ID: " << prt_B->get_id() << '\n'<< '\n';
+     return prt_B;
     }
     break;
     }
@@ -55,23 +59,24 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
     case submarine :
     Submarine*  prt_S =  new Submarine();
     {
-    if(is_AI)
-    {
-      prt_S->set_ship_to_AI();
-      prt_S->set_location(matrix);
-      prt_ship_vec->push_back(prt_S);
-      std::cout <<"NEW ai S ID: " << prt_S->get_id() << '\n' << '\n';
+      if(is_AI)
+      {
+        prt_S->set_ship_to_AI();
+        prt_S->set_location(matrix);
+        prt_ship_vec->push_back(prt_S);
+        std::cout <<"NEW ai S ID: " << prt_S->get_id() << '\n' << '\n';
+        return prt_S;
 
-
-    }
-    else
-    {
-     prt_S->set_ship_to_user();
-     prt_S->set_location(matrix);
-     prt_ship_vec->push_back(prt_S);
-     std::cout <<"NEW player S ID: " << prt_S->get_id() << '\n' << '\n';
-    }
-    break;
+      }
+      else
+      {
+       prt_S->set_ship_to_user();
+       prt_S->set_location(matrix);
+       prt_ship_vec->push_back(prt_S);
+       std::cout <<"NEW player S ID: " << prt_S->get_id() << '\n' << '\n';
+       return prt_S;
+      }
+      break;
     }
     /*
     case Crusier :
@@ -82,5 +87,7 @@ void ship_factory::operator() (int shiptype, std::vector<ships*>* prt_ship_vec, 
 
     break;
     */
-  }
+  }//endofswitch
+
+  return nullptr;
 }

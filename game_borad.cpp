@@ -19,20 +19,26 @@
         }
        else
         {
-          ship_fac(ship_type,&user_ship_vec,user_matrix,false);
+         //user_datz.regstar_unit_inmap(ship_fac(ship_type,
+                            //          &user_ship_vec,user_matrix,false));
+
           // so it ends the loading for testing!
         }
      }
   }
 
-  void game_board::create_AI_ships()
+  void game_board::create_AI_ships(agentz& for_agent)
   {
-    int ship_type;
-    ship_type=2;// cuz only class setup!
+    //int ship_type;
+    //for_agent.create_agent_dis_comp<ships>();
+
+    //ship_type=2;// cuz only class setup!
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-    ship_fac(1,&AI_ship_vec,AI_marrix,true);
+    agentz_shipz_cmp.add_unit_tolist(ship_fac(1,&AI_ship_vec,AI_marrix,true));
     ship_fac(2,&AI_ship_vec,AI_marrix,true);
     ship_fac(3,&AI_ship_vec,AI_marrix,true);
+
+
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
@@ -43,7 +49,9 @@
       ships* prt_temp_ship;
       //preform moveoderz
       prt_temp_ship = AI_ship_vec.at(0);
-      prt_temp_ship->move();
+
+
+      //prt_temp_ship->move();
 
       //update matrix moves
       //ai moveupdatez

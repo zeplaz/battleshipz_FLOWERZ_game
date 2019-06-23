@@ -80,7 +80,7 @@ template <typename...pointpramz>
  {
     for(size_t i = obj_locnodez.size(); i>0; i--)
     {
-    std::vector<std_type> temp_vec = obj_locnodez.at(i);
+      std::vector<std_type> temp_vec = obj_locnodez.at(i);
 
       if (temp_vec != in_point)
       {return false;}

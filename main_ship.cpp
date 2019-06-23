@@ -45,7 +45,8 @@ int main(int argc, char* argv[])
 
       g_board.clear();
       g_board.create_user_ships();
-      g_board.create_AI_ships();
+    //  g_board.create_AI_ships(g_board.avia_1);
+    //  g_board.create_AI_ships(g_board.avia_2);
       //g_board.show();
       //g_board.show(); // Shows AI Board (Testing Feature only)*
       std::cout << "------------------------" << '\n';

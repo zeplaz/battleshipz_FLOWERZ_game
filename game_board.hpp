@@ -7,6 +7,8 @@
 
 #include "ships.hpp"
 #include "ship_factory.hpp"
+#include "agent_decision_component.hpp"
+#include "agent_act.hpp"
 
 using namespace Battle_Shipz;
 
@@ -14,32 +16,71 @@ using namespace Battle_Shipz;
 class game_board
 {
   private :
-  //const int row = 10; // Sets up Grid*
-  //const int collum = 10; // Sets up grid
-  const char water = 247; // Water on grid
-  const char hit = 'x'; //Displyed when a ship is hit
-  //const char Pship = 's'; //Displayed where a player places a ship
+
+  const char water = 247;
+  const char hit = 'x';
   int maxship = 5;
    //Sets Max # of ships on AI board
   char user_matrix[row][collum];
   char AI_marrix[row][collum]; //*
   const int shipnum = 5;
+
+//unit potr_vectors
   std::vector<ships*> user_ship_vec;
   std::vector<ships*> AI_ship_vec;
+
+
+  //factoreiz
   ship_factory ship_fac;
 
 
-  //std::forward_list<agents>  agent_list;
+//componetz
+  agent_decision_component<ships*> user_datz;
+  //agent_decision_component<ships> agentz_shipz_cmp;
+
+
+  std::forward_list<agentz>  agent_list;
   //lamadas for probality agent diesion mekimsn,
+
   public :
 
-  void create_user_ships();
-  void create_AI_ships();
+/////***agentopz
 
+   void  new_agent()
+   {
+     agentz new_agent;
+     agent_list.push_front(new_agent);
+   }
+
+   void set_agentz_defl_parmz()
+   {
+     for (auto agt = agent_list.cbegin(); agt != agent_list.cend(); agt++)
+     {
+
+     }
+    if (empty.begin() == empty.end())
+		std::cout << "forward_list 'agent_list' is emptyz.\n";
+   }
+
+//board_AIagentz
+
+
+
+
+/////***startypz
+//startupfuncionzon newload
+  void create_user_ships();
+  void create_AI_ships(agentz& for_agent);
+
+/////***main_loopz
+//update area
   void update_board();
 
+
+  //
+
  ~game_board()
- {
+  {
    for (size_t i=0; i<user_ship_vec.size(); i++)
     {
       delete[] user_ship_vec.at(i);
@@ -51,7 +92,7 @@ class game_board
        delete[] AI_ship_vec.at(i);
        AI_ship_vec.pop_back();
      }
- }
+  }
 
 
 
@@ -65,7 +106,6 @@ class game_board
             user_matrix[i][j] = '0';
             AI_marrix[i][j]   = '0';
         }
-
     }
   }
 

@@ -37,10 +37,6 @@ using namespace Battle_Shipz;
     bool disabled;
     bool changed_postion;
 
-
-
-
-
     //genratorezrad
     rad_genz rad_rowH{0,row-ship_size};
     rad_genz rad_colH{0,collum-ship_size};
@@ -111,15 +107,15 @@ using namespace Battle_Shipz;
     virtual void rotate();
 
     //virtual void update_location() =0;
-
+/*
     virtual void move()
     { std::cout<< '\n'<<"###INSIZEMOVE_TEST FUNC####" <<'\n';
-      std::valarray<int> temp_moveoffset{2,2};
+
       unit_move_addtion(temp_moveoffset);
 
-    }
+    }*/
 
-    virtual void unit_move_addtion(std::valarray<int>& to_mov_val_ary)
+    virtual void unit_move_addtion(std::valarray<int>& to_mov_val_ary,char (*matrix)[collum])
     {
       std::vector<int>* prt_vec_or_val = ojk_ship_placr.obj_locnodez.data();
 
@@ -136,6 +132,12 @@ using namespace Battle_Shipz;
                   std::cout <<"##test.valarrayr_captured vecdata: " << temp[0]
                             <<" "<< temp[1] << '\n';
                   temp = ojk_ship_placr.point_move_vector_addion(to_mov_val_ary,temp);
+
+                  if(matrix[temp[0]][temp[1]] !='0'|| matrix[temp[0]][temp[1]] !=ship_symbl)
+                  {
+                    std::cout << "|->move_colliton into another ship||" << '\n';
+                    break;
+                  }
                   temp_vec->at(0) =  temp[0];
                   temp_vec->at(1) =  temp[1];
 
