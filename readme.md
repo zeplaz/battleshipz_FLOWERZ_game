@@ -1,8 +1,10 @@
 
 ##BATTLESHIPZ FLOWERZ
+
 ####FOUND ORIGINAL OUTLINE AT:
-##### by:marc_s
 https://stackoverflow.com/questions/56589644/adding-input-from-user-to-a-array-and-displaying-it
+##### by:marc_s
+
 
 ###intent:
 found somone marc_s on stackoverflow makeing alittle game they had a few functions and a bunch of global vars but sitin in some main. it basicly did not do much. and was  more of a outline  ... i decided to make redo almost all of it, into a c++ class system, and aucally make it work.
