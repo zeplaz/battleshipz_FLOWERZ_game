@@ -2,7 +2,7 @@
 ##BATTLESHIPZ FLOWERZ
 
 ####FOUND ORIGINAL OUTLINE AT:
-https://stackoverflow.com/questions/56589644/adding-input-from-user-to-a-array-and-displaying-it
+######https://stackoverflow.com/questions/56589644/adding-input-from-user-to-a-array-and-displaying-it
 ##### by:marc_s
 
 
