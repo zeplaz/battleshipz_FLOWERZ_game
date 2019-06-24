@@ -1,0 +1,45 @@
+
+
+move()
+{
+ if(disabled)
+      {
+
+      }
+
+      if (rotated)
+      {
+        peniliy+=1;
+        std::cout << "stall_event" << '\n';
+
+        
+      }
+
+  else
+  {
+
+  }
+
+}
+template<class collision_type>
+colltioncheck<object_unit_intersection>()
+{
+
+}
+
+template<typename std_type,class object_placed>
+class object_unit_intersection
+{
+
+scan_obj_points(object_placed  in_obj)
+{
+
+}
+
+};
+
+
+object_placed
+
+
+};

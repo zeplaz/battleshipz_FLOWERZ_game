@@ -20,7 +20,7 @@ inline Type derefrence_Type(void * ponter)
     return *(Type*)(ponter);
 }
 
-<template class other_data_type>
+template <class other_data_type>
 struct telagram
 {
   double trazmission_t;

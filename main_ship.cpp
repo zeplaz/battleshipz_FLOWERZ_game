@@ -8,6 +8,7 @@
 #include "ships.hpp"
 #include "game_board.hpp"
 #include "ship_factory.hpp"
+#include "user_interface_player.hpp"
 //Set up Variables
 //Set up Menu
 //Set Up AI Grid
@@ -21,81 +22,55 @@ using namespace  Battle_Shipz;
 
 int main(int argc, char* argv[])
 {
-  game_board g_board;
+    game_board g_board;
+    game_board* ptr_g_board = &g_board;
+    user_interface_player ui_plr_usr;
 
-  bool Quit = 0; //If Quit = 1 it will exit the program
-  //Player Selection Menu
+   //If Quit = 1 it will exit the program
+    bool run =1;
+    //c_random to be realace.
+     srand(time(NULL));
+      //Player Selection Menu
 
-  std::cout << "1: Play Game \n"
-      "2: Quit Game \n"
-      "3: Game Credits \n"
-      "4: How To Play \n";
+      int ui_int_ovride;
+      //inalze user inpt
 
-  int Select; //Variable to allow player to select a option
-  std::cout << "Please Enter a Number from the Options: ";
-  std::cin >> Select;
+      run = ui_plr_usr.Inialz_A_STATE(INIALZ);
 
-  if (Select == 1)
-  {
-      std::cout << "\n"
-          "\n"
-          "\n";
-
-      srand(time(NULL));
-
+      ui_plr_usr.cycle();
       g_board.clear();
-      g_board.create_user_ships();
-    //  g_board.create_AI_ships(g_board.avia_1);
-    //  g_board.create_AI_ships(g_board.avia_2);
-      //g_board.show();
-      //g_board.show(); // Shows AI Board (Testing Feature only)*
-      std::cout << "------------------------" << '\n';
-      // setshipsuser();
-      // show();
-      int pos1, pos2;
+      g_board.create_user_ships(&ui_plr_usr);
+      //
 
-      while (1)
-      {   g_board.show();
-          std::cout << "Please input Location To attack (X then Y):";
-          std::cin >> pos1 >> pos2; // Asking player where to "fire"
-          if (pos1 < 0 || pos1>row || pos2 < 0 || pos2>collum)
-          {
-            char quit;
-            std::cout << "ERROR NOT VAILD POSTION!" << '\n';
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            std::cout << "you want to quit? input q to quit, or anything else to contune";
-            std::cin >> quit;
-            if(quit =='q')
-              {
-                break;
-              }
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            continue;
-          }
 
-          if (g_board.attack(pos1, pos2)) //If the hit is succesful
-              std::cout << "Hit succesful" << '\n';
-          else
-          {
-            std::cout << "Hit Failed" << '\n'; //If there is no hit
-            std::cout << "Remaining Ships: " << g_board.enemy_ships_remain() << '\n';
 
-          }
+      agentz* prt_agent1  = g_board.new_agent();
 
-      if (g_board.enemy_ships_remain() == 0)
-        {
-        std::cout << "Remaining Ships: " << '0' << '\n';
-        std::cout << "You are out of ships!";
-        system("pause");
-        }
-        g_board.clear();
-        g_board.update_board();
+      g_board.create_AI_ships(g_board.new_agent());
 
+      g_board.set_agentz_defl_parmz(ptr_g_board);
+      g_board.create_AI_ships(prt_agent1);
+
+
+      while (run)
+      {
+        ui_plr_usr.Inialz_A_STATE(CMD_INPUT);
+
+         g_board.update_board();
+
+        //  g_board.show();
+        run = ui_plr_usr.cycle();
+
+        if (g_board.enemy_ships_remain() == 0 || !g_board.Quit)
+         {
+            ui_plr_usr.Inialz_A_STATE(GAME_OVER);
+            run = ui_plr_usr.cycle();
+            std::cout << run;
+         }
+
+         //run = !g_board.Quit;
       }// endloop
-    }// end if
 
-
-return 0;
+//shudown?
+  return 0;
 }

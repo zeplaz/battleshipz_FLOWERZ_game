@@ -2,15 +2,17 @@
 #include "game_board.hpp"
 
 
-  void game_board::create_user_ships()
+  void game_board::create_user_ships(user_interface_player* for_player)
   { //int (*prt_matrix)[row][collum] = &matrix;
    //int* ptr_matrix = &matrix[row][collum];
     int ship_type;
+    toMAIN_UI_prt  =for_player;
+
     for (int i=0; i<2; i++)
     {
-      std::cout << "select Ship type: 1:Aircraft_Carrier, 2:Battleship, 3:Submarine, 4:Crusier, 5:Patrol_boat";
+      std::cout << "select Ship type: 1:Aircraft_Carrier, 2:Battleship, 3:Submarine";
       std::cin >> ship_type;
-      if(ship_type >5 || ship_type<1)
+      if(ship_type >3 || ship_type<1)
         {
           std::cout << "ERROR NONEVAILD SHIP";
           std::cin.clear();
@@ -19,42 +21,74 @@
         }
        else
         {
-         //user_datz.regstar_unit_inmap(ship_fac(ship_type,
-                            //          &user_ship_vec,user_matrix,false));
+          //user_datz.regstar_unit_inmap(
 
+           ship_fac(ship_type,
+                    &user_ship_vec,user_matrix,false);
           // so it ends the loading for testing!
+          std::cout << "------------------------" << '\n';
         }
      }
   }
 
-  void game_board::create_AI_ships(agentz& for_agent)
+  void game_board::create_AI_ships(agentz* for_agent)
   {
     //int ship_type;
     //for_agent.create_agent_dis_comp<ships>();
-
     //ship_type=2;// cuz only class setup!
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
-    agentz_shipz_cmp.add_unit_tolist(ship_fac(1,&AI_ship_vec,AI_marrix,true));
-    ship_fac(2,&AI_ship_vec,AI_marrix,true);
-    ship_fac(3,&AI_ship_vec,AI_marrix,true);
-
-
+    //agentz_shipz_cmp.add_unit_tolist(;
+    //for_agent->
+  //  std::cout <<"AI-EXITEDexit_facoty_andregistarz" <<'\n';
+  //  for_agent->
+    for (auto agt = agent_list.cbegin(); agt != agent_list.cend(); agt++)
+    {
+      agentz* ptr_agent = new agentz(*agt);
+      ptr_agent->add_ship_tocomp_ctl_list(ship_fac(aircraft_carrier,&AI_ship_vec,AI_marrix,true));
+      ptr_agent->add_ship_tocomp_ctl_list(ship_fac(submarine,&AI_ship_vec,AI_marrix,true));
+      ptr_agent->add_ship_tocomp_ctl_list(ship_fac(battleship,&AI_ship_vec,AI_marrix,true));
+      delete ptr_agent;
+    }
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
   }
+
+  agentz*  game_board::new_agent()
+   {
+    agentz new_agent;
+    agent_list.push_front(new_agent);
+    return &new_agent;
+    //agent_list.emplace_front(agentz);
+   }
+
+
+   void game_board::set_agentz_defl_parmz(game_board* prt_toactive_gid)
+   {
+     for (auto agt = agent_list.cbegin(); agt != agent_list.cend(); agt++)
+     {
+       //user_ship_vec.size()/
+            //game_board* gb_ptr=  prt_gb();
+        agentz* ptr_agent = new agentz(*agt);
+        ptr_agent->create_gb_setup(prt_toactive_gid);
+
+        if (agent_list.cbegin() == agent_list.cend())
+            std::cout << "forward_list 'agent_list' is emptyz.\n";
+
+       delete ptr_agent;
+      }
+
+   }
 
   void game_board::update_board()
   {
       ships* prt_temp_ship;
       //preform moveoderz
       prt_temp_ship = AI_ship_vec.at(0);
-
-
       //prt_temp_ship->move();
-
-      //update matrix moves
-      //ai moveupdatez
+      agentz temp_agent   = agent_list.front();
+      temp_agent.test_ctl_list();
+      //update matrix moves      //ai moveupdatez
       for(size_t i =0; i < AI_ship_vec.size(); i++)
       {
         prt_temp_ship = AI_ship_vec.at(i);
@@ -76,7 +110,6 @@
         }
 
         // for player_redaw
-
        for(size_t i =0; i < user_ship_vec.size(); i++)
          {
            prt_temp_ship = user_ship_vec.at(i);
@@ -92,6 +125,10 @@
               }
           }
 
+          game_board::show();
+          Quit = game_board::usr_pollz();
+          game_board::clear();
+          game_board::currentGB_count++;
 }
           //  x =
           //  y = cur_point_prt.at(1);
