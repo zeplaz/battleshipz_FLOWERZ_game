@@ -18,7 +18,7 @@ class agentz
 
    agent_decision_component<ships*> ship_dis_comp;
    agent_decision_component<game_board*> bord_dis_comp;
-   std::vector<ships*> contrl_list_ships;
+   //std::vector<ships*> contrl_list_ships;
 
     public :
     ~agentz() = default;
@@ -30,7 +30,10 @@ class agentz
 
      void create_gb_setup(game_board* prt_toactive_gid)
      {
-       bord_dis_comp.add_unit_tocrl_list(prt_toactive_gid);
+        std::cout <<"LOADING BOARD TO AGENTZID:" << a_id << 'n'
+        << "*-ptr->gb|" << prt_toactive_gid << '\n';
+
+        bord_dis_comp.add_unit_tocrl_list(prt_toactive_gid);
      }
 
     void set_id()
@@ -58,9 +61,14 @@ class agentz
     }
 //template <typename uni_tpy>
 void test_ctl_list()
-{
-//  std::valarray<int> tes_moveoffset{2,2};
-  //game_board* prt_to_actgb = bord_dis_comp.unit_radm_access_ctl_list(0);
+{ int cltsize = bord_dis_comp.contl_list_size();
+  std::cout <<"##ctllistboad testz:size:" << bord_dis_comp.contl_list_size() << '\n';
+
+  if(cltsize !=0)
+  {
+    std::valarray<int> tes_moveoffset{2,2};
+    game_board* prt_to_actgb = bord_dis_comp.unit_radm_access_ctl_list(0);
+  }
 
     //  auto matrix = prt_to_actgb->get_ai_board_data();
 
@@ -85,8 +93,10 @@ void test_ctl_list()
 
     void add_ship_tocomp_ctl_list(ships* in_ship)
     {
-      contrl_list_ships.push_back(in_ship);
+      //  contrl_list_ships.push_back(in_ship);
       ship_dis_comp.add_unit_tocrl_list(in_ship);
+      std::cout << "SHIPADDED_CTLLIST FOR AGENTID:" << a_id << " size:ofCLZ-|"
+                << ship_dis_comp.get_ctl_list_size()  << '\n';
     }
 
     template<class unit_type>

@@ -43,6 +43,11 @@ class base_agent_dsc
       return (total_shipz -Usr_ship_count - get_unit_id_map_size() -get_ctl_list_size());
     }
 
+    size_t contl_list_size()
+    {
+      return (uint_controlist.size());
+    }
+
     void move_factorz(char (*matrix)[collum])
     {
       double ent_map_sizevar = (double)get_unit_id_map_size();
@@ -66,7 +71,7 @@ class base_agent_dsc
 
 
     inline void add_unit_tocrl_list(unittype in_unit_ptr)
-     {  std::cout <<"AI_ADDED_UNITZ"<< '\n';
+     {  std::cout <<"AI_ADDED_UNITZ:&"<< in_unit_ptr << '\n';
         uint_controlist.push_back(in_unit_ptr);
      }
 
@@ -74,7 +79,7 @@ class base_agent_dsc
 
     unittype unit_radm_access_ctl_list(int unit_at_vec_place)
      {
-      return uint_controlist.at(0);
+      return uint_controlist.at(unit_at_vec_place);
      }
 
      template <class unit_type>

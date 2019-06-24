@@ -87,7 +87,6 @@
       prt_temp_ship = AI_ship_vec.at(0);
       //prt_temp_ship->move();
       agentz temp_agent   = agent_list.front();
-      temp_agent.test_ctl_list();
       //update matrix moves      //ai moveupdatez
       for(size_t i =0; i < AI_ship_vec.size(); i++)
       {
@@ -124,7 +123,7 @@
               cur_point_prt++;
               }
           }
-
+          temp_agent.test_ctl_list();
           game_board::show();
           Quit = game_board::usr_pollz();
           game_board::clear();
