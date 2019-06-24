@@ -17,10 +17,15 @@ i made a game board class, and add in ships classes, and a factory settup, and s
 
 #### current work
 currntly:now building in a msg system to and working on agent compoents to make the AI.... will see. 
+move had been disabled. but expanding the agent funcions..currntly msg systme offline..etc.
 
 #### OTHER: FUTURE PLANz
 id like to add a tilemap and mabye then a UDP connection system for 
 
 #### complie with {will be making a make file soon}
+
+new complie line: g++ -std=c++17 main_ship.cpp ships.cpp ship_factory.cpp game_borad.cpp agent_act.cpp -o ship_out
+
+old:
  g++ -std=c++17 main_ship.cpp ships.cpp ship_factory.cpp game_borad.cpp  -o ship_out
 
