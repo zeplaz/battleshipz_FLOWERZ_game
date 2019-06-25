@@ -39,16 +39,17 @@ int main(int argc, char* argv[])
 
       ui_plr_usr.cycle();
       g_board.clear();
-      g_board.create_user_ships(&ui_plr_usr);
+
       //
-
-
 
       agentz* prt_agent1  = g_board.new_agent();
 
       g_board.create_AI_ships(g_board.new_agent());
 
       g_board.set_agentz_defl_parmz(ptr_g_board);
+
+      g_board.create_user_ships(&ui_plr_usr);
+      
       g_board.create_AI_ships(prt_agent1);
 
 

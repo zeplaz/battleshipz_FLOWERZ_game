@@ -41,13 +41,14 @@
     //for_agent->
   //  std::cout <<"AI-EXITEDexit_facoty_andregistarz" <<'\n';
   //  for_agent->
-    for (auto agt = agent_list.cbegin(); agt != agent_list.cend(); agt++)
+    for (auto agt = agent_list.begin(); agt != agent_list.end(); agt++)
     {
-      agentz* ptr_agent = new agentz(*agt);
-      ptr_agent->add_ship_tocomp_ctl_list(ship_fac(aircraft_carrier,&AI_ship_vec,AI_marrix,true));
-      ptr_agent->add_ship_tocomp_ctl_list(ship_fac(submarine,&AI_ship_vec,AI_marrix,true));
-      ptr_agent->add_ship_tocomp_ctl_list(ship_fac(battleship,&AI_ship_vec,AI_marrix,true));
-      delete ptr_agent;
+      //*agt->;
+      agentz* prt_agent= &*agt;
+      prt_agent->add_ship_tocomp_ctl_list(ship_fac(aircraft_carrier,&AI_ship_vec,AI_marrix,true));
+      prt_agent->add_ship_tocomp_ctl_list(ship_fac(submarine,&AI_ship_vec,AI_marrix,true));
+      prt_agent->add_ship_tocomp_ctl_list(ship_fac(battleship,&AI_ship_vec,AI_marrix,true));
+      //delete[] ptr_agent;
     }
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
     //ship_fac(ship_type,&AI_ship_vec,AI_marrix,true);
@@ -64,18 +65,19 @@
 
 
    void game_board::set_agentz_defl_parmz(game_board* prt_toactive_gid)
-   {
-     for (auto agt = agent_list.cbegin(); agt != agent_list.cend(); agt++)
+   {  std::cout << "#DEINE_AGENT_SETUPPARMZ to board&" << prt_toactive_gid;
+
+     for (auto agt = agent_list.begin(); agt != agent_list.end(); agt++)
      {
        //user_ship_vec.size()/
             //game_board* gb_ptr=  prt_gb();
-        agentz* ptr_agent = new agentz(*agt);
+        agentz* ptr_agent = &*agt;
+        std::cout<<"FOR AGENTID:" <<ptr_agent->get_id();
         ptr_agent->create_gb_setup(prt_toactive_gid);
 
         if (agent_list.cbegin() == agent_list.cend())
             std::cout << "forward_list 'agent_list' is emptyz.\n";
 
-       delete ptr_agent;
       }
 
    }
@@ -86,7 +88,9 @@
       //preform moveoderz
       prt_temp_ship = AI_ship_vec.at(0);
       //prt_temp_ship->move();
+
       agentz temp_agent   = agent_list.front();
+
       //update matrix moves      //ai moveupdatez
       for(size_t i =0; i < AI_ship_vec.size(); i++)
       {
@@ -123,6 +127,7 @@
               cur_point_prt++;
               }
           }
+
           temp_agent.test_ctl_list();
           game_board::show();
           Quit = game_board::usr_pollz();

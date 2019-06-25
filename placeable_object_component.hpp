@@ -13,8 +13,8 @@
 
 namespace Battle_Shipz
   {
-   #define row 15
-   #define collum 20
+   #define row 20
+   #define collum 75
    enum    {aircraft_carrier=1,battleship=2,
             submarine=3,crusier=4, patrol_boat=5};
   }

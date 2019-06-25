@@ -17,7 +17,8 @@ class agentz
   static int next_agent_id;
 
    agent_decision_component<ships*> ship_dis_comp;
-   agent_decision_component<game_board*> bord_dis_comp;
+   std::vector<game_board*> gb_ptr_collection;
+   //agent_decision_component<game_board*> bord_dis_comp;
    //std::vector<ships*> contrl_list_ships;
 
     public :
@@ -32,8 +33,9 @@ class agentz
      {
         std::cout <<"LOADING BOARD TO AGENTZID:" << a_id << 'n'
         << "*-ptr->gb|" << prt_toactive_gid << '\n';
-
-        bord_dis_comp.add_unit_tocrl_list(prt_toactive_gid);
+        gb_ptr_collection.push_back(prt_toactive_gid);
+        //bord_dis_comp.add_unit_tocrl_list(prt_toactive_gid);
+        std::cout << "newsizeCLTZ:" << gb_ptr_collection.size() << '\n' <<'\n';
      }
 
     void set_id()
@@ -60,26 +62,13 @@ class agentz
       return true;
     }
 //template <typename uni_tpy>
-void test_ctl_list()
-{ int cltsize = bord_dis_comp.contl_list_size();
-  std::cout <<"##ctllistboad testz:size:" << bord_dis_comp.contl_list_size() << '\n';
+  void test_ctl_list();
 
-  if(cltsize !=0)
-  {
-    std::valarray<int> tes_moveoffset{2,2};
-    game_board* prt_to_actgb = bord_dis_comp.unit_radm_access_ctl_list(0);
-  }
-
-    //  auto matrix = prt_to_actgb->get_ai_board_data();
-
-//  ships* prt_cut_ctl = ship_dis_comp.unit_radm_access_ctl_list(0);
-  //prt_cut_ctl->unit_move_addtion(&tes_moveoffset,*matrix);
   //std::cout <<
 
-}
     void agent_exuc()
-    { bool need_update;
-
+    {
+      bool need_update;
       //need_update =Calculate_playr_probedata();
       //// do more
     }

@@ -19,13 +19,15 @@ class base_agent_dsc
     private :
     int total_tracz;
     size_t Usr_ship_count;
-    int agent_toalz;
+
     double intel_eror;
 
     std::vector<unittype> uint_controlist;
     std::unordered_map<int,unittype> uint_id_map;
 
     public:
+    int agent_toalz;
+
     ~agent_decision_component() = default;
 
     size_t get_ctl_list_size()

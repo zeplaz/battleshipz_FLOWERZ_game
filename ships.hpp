@@ -133,10 +133,18 @@ using namespace Battle_Shipz;
                             <<" "<< temp[1] << '\n';
                   temp = ojk_ship_placr.point_move_vector_addion(to_mov_val_ary,temp);
 
-                  if(matrix[temp[0]][temp[1]] !='0'|| matrix[temp[0]][temp[1]] !=ship_symbl)
+                  if(matrix[temp[0]][temp[1]] !='0'&& matrix[temp[0]][temp[1]] !=ship_symbl)
                   {
                     std::cout << "|->move_colliton into another ship||" << '\n';
                     break;
+                  }
+                  if(temp[0]>row)
+                  {
+                    temp[0]= 0;
+                  }
+                  if(temp[1]>collum)
+                  {
+                    temp[1]= 0;
                   }
                   temp_vec->at(0) =  temp[0];
                   temp_vec->at(1) =  temp[1];
