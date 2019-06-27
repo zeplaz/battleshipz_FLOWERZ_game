@@ -56,13 +56,7 @@ int main(int argc, char* argv[])
 
       while (run)
       {
-        if (g_board.enemy_shipz == 0 )
-         {
-           //std::cout << "BEGIN:SHIPONAIBORD$:"<< g_board.enemy_ships_remain() <<'\n';
-            ui_plr_usr.Inialz_A_STATE(GAME_OVER);
-            run = ui_plr_usr.cycle();
-            std::cout << run;
-         }
+
         ui_plr_usr.Inialz_A_STATE(CMD_INPUT);
 
          g_board.update_board();
@@ -70,9 +64,16 @@ int main(int argc, char* argv[])
 
         //  g_board.show();
         run = ui_plr_usr.cycle();
+        run =g_board.usr_pollz();
+      /*  if (g_board.enemy_shipz == 0 )
+         {
+           //std::cout << "BEGIN:SHIPONAIBORD$:"<< g_board.enemy_ships_remain() <<'\n';
+            ui_plr_usr.Inialz_A_STATE(GAME_OVER);
+            run = ui_plr_usr.cycle();
+            std::cout << run;
+         }
 
-
-
+         */
          //run = !g_board.Quit;
       }// endloop
 

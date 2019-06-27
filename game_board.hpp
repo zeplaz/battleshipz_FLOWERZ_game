@@ -87,7 +87,7 @@ class game_board
   //lamadas for probality agent diesion mekimsn,
 
   public :
-  
+
   int enemy_shipz;
   bool Quit = 0;
   ~game_board()
