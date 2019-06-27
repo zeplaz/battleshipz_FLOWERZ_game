@@ -99,7 +99,8 @@ bool cycle()
       if(UI_state==INIALZ)
       {
         new_state = false;
-        std::cout << "inside _ilsizeswitch...";
+        std::cout << "inside _ilsizeswitch..."<<'\n'
+        <<"______________________________________________"<<'\n';
         return intrfcz_Inialz();
       }
 

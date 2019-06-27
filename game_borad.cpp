@@ -95,14 +95,14 @@
       for(size_t i =0; i < AI_ship_vec.size(); i++)
       {
         prt_temp_ship = AI_ship_vec.at(i);
-        std::cout << "->UPDATE: ship_ID: "<< prt_temp_ship-> get_id() <<'\n'
-                  << prt_temp_ship->get_ship_size()<<  "+++++++++++++" <<'\n';
+        std::cout << "->UPDATE: ship_ID: "<< prt_temp_ship-> get_id() <<'\n';
+                //  << prt_temp_ship->get_ship_size()<<  "+++++++++++++" <<'\n';
 
         std::vector<std::vector<int>>* temp_vec_prt = prt_temp_ship->ojk_ship_placr.get_ptr_ship_loc();
 
-        std::cout << "##size of ptrz arrayz:"
-                  << temp_vec_prt->size() << "@@@@@@@@"
-                  << prt_temp_ship->get_ship_symbol() << '\n' << '\n';
+      //  << "##size of ptrz arrayz:"
+              //    << temp_vec_prt->size() << "@@@@@@@@"
+                 std::cout  << prt_temp_ship->get_ship_symbol() << '\n' << '\n';
 
             for(size_t j=0; j <temp_vec_prt->size(); j++ )
             {
@@ -122,7 +122,7 @@
               std::cout  << "@@ship symbol:" << prt_temp_ship->get_ship_symbol() << '\n';
               auto cur_point_prt = prt_temp_ship->ojk_ship_placr.prt_reutn_vec_data();
 
-              std::cout <<"## val test.UPDATE:" << cur_point_prt->at(0) <<" "<< cur_point_prt->at(1) << '\n';
+              //std::cout <<"## val test.UPDATE:" << cur_point_prt->at(0) <<" "<< cur_point_prt->at(1) << '\n';
               user_matrix[cur_point_prt->at(0)][cur_point_prt->at(1)] =  prt_temp_ship->get_ship_symbol();
               cur_point_prt++;
               }

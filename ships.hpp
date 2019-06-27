@@ -10,6 +10,7 @@
 #include <bitset>
 #include <cassert>
 #include <valarray>
+#include <tuple>
 
 #include "placeable_object_component.hpp"
 
@@ -35,7 +36,9 @@ using namespace Battle_Shipz;
 
     bool sunk;
     bool disabled;
+    double damage_taken;
     bool changed_postion;
+
 
     //genratorezrad
     rad_genz rad_rowH{0,row-ship_size};
@@ -52,6 +55,7 @@ using namespace Battle_Shipz;
     //pure virtualz
     virtual std::vector<int> rad_loc_placer()=0;
     virtual void set_location (char (*matrix)[collum])=0;
+    virtual std::tuple<double,std::vector<bool>>  damage_report() =0;
 
 
     // overloaded funcs
@@ -66,7 +70,10 @@ using namespace Battle_Shipz;
     }
 
     //inlined fucnz
-
+    inline virtual void has_collided(std::vector<int>* colsionvec)
+    {
+      ojk_ship_placr.set_colided_at(colsionvec);
+    }
 
 
     inline bool has_pos_changed()
@@ -119,7 +126,7 @@ using namespace Battle_Shipz;
     {
       std::vector<int>* prt_vec_or_val = ojk_ship_placr.obj_locnodez.data();
 
-        std::cout <<"##test.prtr_capture_vecdata";
+        //std::cout <<"##test.prtr_capture_vecdata";
                   //<< prt_vec_or_val1->at(0) <<" "
                 //  << prt_vec_or_val2->at(1) << '\n';
                 std::valarray<int> temp(2);
@@ -129,13 +136,16 @@ using namespace Battle_Shipz;
                   temp[0] =temp_vec->at(0);
                   temp[1] =temp_vec->at(1);
 
-                  std::cout <<"##test.valarrayr_captured vecdata: " << temp[0]
-                            <<" "<< temp[1] << '\n';
+                  //std::cout <<"##test.valarrayr_captured vecdata: " << temp[0]
+                            //<<" "<< temp[1] << '\n';
                   temp = ojk_ship_placr.point_move_vector_addion(to_mov_val_ary,temp);
 
                   if(matrix[temp[0]][temp[1]] !='0'&& matrix[temp[0]][temp[1]] !=ship_symbl)
                   {
                     std::cout << "|->move_colliton into another ship||" << '\n';
+
+                    has_collided(temp_vec);
+
                     break;
                   }
                   if(temp[0]>row)
@@ -149,7 +159,7 @@ using namespace Battle_Shipz;
                   temp_vec->at(0) =  temp[0];
                   temp_vec->at(1) =  temp[1];
 
-                  std::cout <<"##test.valarrayrmzaddior: " << temp[0] <<" " << temp[1] << '\n';
+                  //std::cout <<"##test.valarrayrmzaddior: " << temp[0] <<" " << temp[1] << '\n';
                   std::cout <<"##test.obehjcvk: " << ojk_ship_placr.obj_locnodez.data()->at(0)
                             <<" " <<  ojk_ship_placr.obj_locnodez.data()->at(1)<< '\n'
                             << "-----------------------" << '\n';
@@ -166,10 +176,9 @@ using namespace Battle_Shipz;
                            [ojk_ship_placr.obj_locnodez.data()->at(1)]= ship_symbl;
                     }*/
     }
-
-
-
   };
+
+  ////new ship classes!
 
   class Aircraft_Carrier : public ships
     {
@@ -177,7 +186,7 @@ using namespace Battle_Shipz;
       size_t ship_size = 5;
       char ship_symbl = 'C';
       std::bitset<5> damage_model;
-
+      //std::vector<bool> vec_damge;
       public :
 
       Aircraft_Carrier():ships(next_ship_id){}
@@ -197,8 +206,9 @@ using namespace Battle_Shipz;
       }
     //  virtual void update_location();
 
+     inline std::tuple<double,std::vector<bool>> damage_report();
 
-    };
+};
 
   class Battleship : public ships
   {
@@ -226,7 +236,7 @@ using namespace Battle_Shipz;
     }
 
     //virtual void update_location();
-
+    inline std::tuple<double,std::vector<bool>> damage_report();
 
 
   };
@@ -256,6 +266,9 @@ using namespace Battle_Shipz;
       return ship_symbl;
     }
   //  virtual void update_location();
+
+    inline std::tuple<double,std::vector<bool>> damage_report();
+
 
   };
 

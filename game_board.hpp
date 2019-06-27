@@ -72,6 +72,8 @@ class game_board
   std::vector<ships*> AI_ship_vec;
 
 
+
+
   //factoreiz
   ship_factory ship_fac;
 
@@ -85,6 +87,8 @@ class game_board
   //lamadas for probality agent diesion mekimsn,
 
   public :
+  
+  int enemy_shipz;
   bool Quit = 0;
   ~game_board()
    {
@@ -175,6 +179,7 @@ class game_board
            {
             std::cout << "Hit Failed" << '\n'; //If there is no hit
             std::cout << "Remaining Ships: " << game_board::enemy_ships_remain() << '\n';
+            enemy_shipz = game_board::enemy_ships_remain();
            }
            return true;
         }
@@ -190,8 +195,8 @@ class game_board
     {
         for (int j = 0; j < collum; j++)
         {
-            user_matrix[i][j] = '0';
-            AI_marrix[i][j]   = '0';
+            user_matrix[i][j] = '#';
+            AI_marrix[i][j]   = '#';
         }
     }
   }
@@ -228,7 +233,7 @@ inline void show()
       {
         for (int j = 0; j < collum; j++)
          {
-           if (AI_marrix[i][j] != '0'|| AI_marrix[i][j] !='V' || AI_marrix[i][j] !='x') //
+           if (AI_marrix[i][j] =='V' || AI_marrix[i][j] =='X') //
             c--;
             if(AI_marrix[i][j] =='S' || AI_marrix[i][j] == 'B' ||AI_marrix[i][j]=='C')
             {c++;}
@@ -238,12 +243,21 @@ inline void show()
    }
 
 
+inline bool AI_attack_player(int x, int y)
+{
+  if (user_matrix[x][y] == 'C' || user_matrix[x][y] == 'B' || user_matrix[x][y] == 'C' )
+  {
+      user_matrix[x][y] = 'X';
+      return true;
+  }
+}
+
 inline bool attack(int x, int y)
 {
 
-  if (AI_marrix[x][y] == '3')
+  if (AI_marrix[x][y] == 'C' || AI_marrix[x][y] == 'B' || AI_marrix[x][y] == 'C' )
   {
-      AI_marrix[x][y] = 'x';
+      AI_marrix[x][y] = 'X';
       return true;
   }
   return false;

@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
 
       ui_plr_usr.cycle();
       g_board.clear();
+      //g_board.show();
 
       //
 
@@ -49,25 +50,28 @@ int main(int argc, char* argv[])
       g_board.set_agentz_defl_parmz(ptr_g_board);
 
       g_board.create_user_ships(&ui_plr_usr);
-      
+
       g_board.create_AI_ships(prt_agent1);
 
 
       while (run)
       {
-        ui_plr_usr.Inialz_A_STATE(CMD_INPUT);
-
-         g_board.update_board();
-
-        //  g_board.show();
-        run = ui_plr_usr.cycle();
-
-        if (g_board.enemy_ships_remain() == 0 || !g_board.Quit)
+        if (g_board.enemy_shipz == 0 )
          {
+           //std::cout << "BEGIN:SHIPONAIBORD$:"<< g_board.enemy_ships_remain() <<'\n';
             ui_plr_usr.Inialz_A_STATE(GAME_OVER);
             run = ui_plr_usr.cycle();
             std::cout << run;
          }
+        ui_plr_usr.Inialz_A_STATE(CMD_INPUT);
+
+         g_board.update_board();
+          //std::cout << "ENDL:IFESHIPONAIBORD$:"<< g_board.enemy_ships_remain() <<'\n';
+
+        //  g_board.show();
+        run = ui_plr_usr.cycle();
+
+
 
          //run = !g_board.Quit;
       }// endloop

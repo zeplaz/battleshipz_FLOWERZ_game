@@ -7,7 +7,10 @@
 #include "ships.hpp"
 #include "game_board.hpp"
 #include "agent_decision_component.hpp"
+#include "agent_sensor_memorx.hpp"
 //#include "tela_dispacher.hpp"
+
+const static double MEM_DEPTH = -12.00;
 
 class game_board;
 class agentz
@@ -21,13 +24,28 @@ class agentz
    //agent_decision_component<game_board*> bord_dis_comp;
    //std::vector<ships*> contrl_list_ships;
 
-    public :
-    ~agentz() = default;
 
-    agentz()
+
+    public :
+    agent_sensor_memorx<agentz*, double>* senz_memrx;
+    agent_decision_component<agentz*> agent_dis_comp;
+
+
+    ~agentz()
+    {
+      delete senz_memrx;
+    }
+
+
+    agentz();
+
+
+     inline agentz* get_self_ptr()
      {
-      set_id();
+       return this;
      }
+
+
 
      void create_gb_setup(game_board* prt_toactive_gid)
      {
@@ -64,6 +82,53 @@ class agentz
 //template <typename uni_tpy>
   void test_ctl_list();
 
+  void scan_other(agentz* other_ptr_agnztz);
+
+  template<class unit_type>
+
+  std::vector<unit_type*> capture_ai_controlist(agentz* prt_to_contact)
+  {
+  //  if(prt_to_contact->senz_memrx())
+  }
+
+  size_t get_unit_ctllistcount()
+  {
+    return this->agent_dis_comp.contl_list_size();
+  }
+
+  void scan_proccedure_incomeing();
+
+  void update_agent_visionz()
+  {
+
+
+  }
+
+
+
+  template<class recordable_idenity>
+  recordable_idenity* scanned_by_contact(agentz* incoming_scan_prt)
+  {
+  //  incoming_scan_prt->scan_proccedure_incomeing();
+
+    /* last_time_spotted(-999),
+                   time_found_visible(-999),
+
+                   //last_time_visible(0),
+                   comm_range(-0.99),
+                     incoming_scan_prt->known_uint_count =
+                   ,pridicted_rate_change_of_influnce(0)
+                     {
+                       comrad_statuz.danger =-999;
+                       comrad_statuz.like_ability=-999;
+                       comrad_statuz.ambivalents=-999;
+                       int array_2d[2] = {0,0};
+                       prev_incouter_vec.push_back(std::make_tuple(array_2d,0.0,0.0));
+                     }
+                     */
+    return get_self_ptr();
+  }
+
   //std::cout <<
 
     void agent_exuc()
@@ -73,11 +138,16 @@ class agentz
       //// do more
     }
 
+
     template <class unit_type*>
     void agent_addz_uint_toMap(unit_type* in_uint)
     {
       ship_dis_comp.regstar_unit_inmap(in_uint);
     }
+
+    void ship_sunk(int vec_loc);
+
+
 
 
     void add_ship_tocomp_ctl_list(ships* in_ship)

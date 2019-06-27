@@ -7,6 +7,8 @@
 //#include <cstdint>
 #include <type_traits>
 #include <utility>
+#include <stack>
+#include <valarray>
 
 //using namespace Battle_Shipz;
 #include "rad_genz.hpp"
@@ -21,6 +23,32 @@ namespace Battle_Shipz
 
 
 
+   //template <typename T>
+//lass MyVector : public std::vector<T, MyCustomAllocator<T> > {};
+
+  template<typename std_type>
+  using tpl_vector = std::vector<std_type,std::allocator<std_type>>;
+
+  template<typename std_type>
+  using tpl_vector_vector =  std::vector<std_type,std::allocator<std_type>>;
+
+  template<typename std_type>
+  using tpl_valarray = std::valarray<std_type>;
+
+
+  template<typename std_type>
+  struct sb_place_d
+   {
+     tpl_vector<std_type> loc_data;
+     tpl_valarray<std_type> val_place_flags;
+   };
+
+   typedef sb_place_d<int> sint_place_d;
+   typedef sb_place_d<float> sfloat_place_d;
+   typedef tpl_vector<int> vec_int;
+   typedef tpl_vector_vector<int> vector_in_vector_;
+
+
 template<typename std_type>
   class placeable_object_component
 {
@@ -28,13 +56,24 @@ template<typename std_type>
 
 
   public :
+    //vec_int tes;
+  //  vec_int raw_loc_vec;
+    sint_place_d   loc_cord_ints_Wflags;
+    sfloat_place_d loc_cord_floatz_Wflags;
 
+    //vec_int
     std::vector<std::vector<std_type>> obj_locnodez;
+    std::stack<std::vector<std_type>*>  colsid_stack;
 
     rad_genz randomgen_bool{0,1};
     rad_genz rad_row{0,row};
     rad_genz rad_col{0,collum};
 
+    void set_colided_at(std::vector<std_type>* in_colid_cornetz)
+    {
+      std::cout <<"COLIAOZNST TO::" << in_colid_cornetz->at(0) << in_colid_cornetz->at(1) << '\n' << '\n';
+      colsid_stack.push(in_colid_cornetz);
+    }
     auto prt_reutn_vec_data()
     {
       return obj_locnodez.data();
