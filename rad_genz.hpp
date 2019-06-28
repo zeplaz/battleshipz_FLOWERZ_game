@@ -1,5 +1,12 @@
 
 
+/* RAD_GENZ.HPP
+  |-$-|stable alpha 0.00001
+    ##a base radom genrator, like need to expalnd this working or move it osmewhere...
+    some basic gens, and a useful little use class, trying to cleanup stuff. but whaver.works now will expand or move.
+*/
+
+#pragma once
 
 class rad_genz {
 

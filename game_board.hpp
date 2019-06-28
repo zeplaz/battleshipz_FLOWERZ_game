@@ -144,7 +144,7 @@ class game_board
    {
       int us_num_ship = user_ship_vec.size();
       int aiknown_toal = AI_ship_vec.size();
-      log_datz_data.ship_current = us_num_ship+aiknown_toal;
+      //log_datz_data.ship_current = us_num_ship+aiknown_toal;
      //user_ship_vec.size() !=
     //  double eror_vk = static_cast<double>(user_datz.diffrence_in_user_known(log_datz_data.ship_current));
       // user_datz.regstar_unit_inmap();

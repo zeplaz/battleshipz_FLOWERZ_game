@@ -24,15 +24,17 @@ int main(int argc, char* argv[])
 {
     game_board g_board;
     game_board* ptr_g_board = &g_board;
+
     user_interface_player ui_plr_usr;
 
    //If Quit = 1 it will exit the program
-    bool run =1;
+      bool run =1;
+      int ui_int_ovride;
     //c_random to be realace.
-     srand(time(NULL));
+      srand(time(NULL));
       //Player Selection Menu
 
-      int ui_int_ovride;
+
       //inalze user inpt
 
       run = ui_plr_usr.Inialz_A_STATE(INIALZ);
