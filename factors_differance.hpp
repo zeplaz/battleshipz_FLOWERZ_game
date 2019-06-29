@@ -50,8 +50,20 @@ std::valarray<double>* trazmit_current_table()
 template <class entiy_type>
 void inputprocg(entiy_type self,entiy_type refrnt)
 {
+if(does)
+{
+  return cmd_msg.. call
 
 
+
+}
+
+}
+
+ bool Handle_telagram(const telagram& tela)
+{
+  //covekvisome goof blood.z.. 
+  //needs to call the copoents, wrope them in, to a delayed call. so the thread colid.
 }
 
   template<class inentity>

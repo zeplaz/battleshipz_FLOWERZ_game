@@ -1,4 +1,19 @@
-//ship.hpp
+/* SHIPS_HPP
+  #file holds the base class ships, used as aa loss raw pontiner often,
+  ->lage amoutn of reltivle mirroed proces code, for the the classes,s but, seemly
+  it feels like its alot of abit spacues code, but, should comple clean enough. im not suew
+  though when i start, factoring in the facoitres, as a cost space, but, feel. the ship build wille allow for
+  a fluid yet, restfice reprecuesons of the system. its ahrd to ravel over the loose soilz.
+      {i havw resverions about some lost data, elsewhere, in the casting down to the base pointer.
+      }
+  i have to say major revisations around, how ships have been played, i think the expaive nature
+  of the class with seemly alot dumped but very miroriedly into subclass makes it reflective
+  but, there some structal constrantes, which next obkect would hopepful be able to "trsgress"
+  so, the metaprogrmaical "saea" . will be the strrictions. id like to keep them from having much
+  more then the plcable componet, a comms componet, seem fair. and limited telgram acess, as clsassical sssumped.
+  telgram msgsing with restrcions.z
+*/
+//
 
 #pragma once
 

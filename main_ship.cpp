@@ -44,10 +44,12 @@ int main(int argc, char* argv[])
       //g_board.show();
 
       //
-
+//_>thread weveing must allow for a incoporation of the structires, of patern ufolding,but broken but
+//expcted phsical disrptions system by systemz.
       agentz* prt_agent1  = g_board.new_agent();
 
-      g_board.create_AI_ships(g_board.new_agent());
+      g_board.create_AI_ships(g_board.new_agent());//so here some pre cure genz.
+
 
       g_board.set_agentz_defl_parmz(ptr_g_board);
 
