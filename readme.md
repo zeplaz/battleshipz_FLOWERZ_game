@@ -26,23 +26,27 @@ albale chanlles of attempt.
 basic facotry stucs, are working, feel confentd, to soon be able to brign them into the gride clacaions
 lazzly i need to work on alot of the math and some of the calcutpory repsotoriez pre calced it seems
 i think though should be able to make cycles, that only do it, every frew whavers, but, feel real. uint_id_maphowelse
-to wez. ahez. anz.. i;ve been really pushign thre emeoey struz. but, idk think ineed sti down and re code, alot of the models UML. and see how i can make sour ethis dance works well. otherise. seems like its abuit idk ulkd
+to wez. ahez. anz.. i;ve been really pushign thre memoery struz. but, idk think ineed sti down and re code, alot of the models UML. and see how i can make sour ethis dance works well. otherise. been adding comments to clearup still alot more to be done.
 
 
 
 #### current work
-->make the agents be able to hang in the hoodz, and then make sure user interacion is respfulz.
+->make the agents be able to hang in the the playspace, and being anyaltics of their processing, diffrent sorce objects
+for data around there world. and building up the interaction systems. and collition tetections, othe physics compoents,
+and then make sure user interacion is respfulz.
 but ya, clena up the flow from main to borad to etc. make sure what is soild is also fuid, and then do the work on the hellper funciosnz. agent problems may require a redeicdes, but at this poiint seem refsucise rethought and press be good, acurate and aprt.
 
 OLD::now building in a msg system to and working on agent compoents to make the AI.... will see.
 move had been disabled. but expanding the agent funcions..currntly msg systme offline..etc.
 
 #### OTHER: FUTURE PLANz
-id like to add a tilemap and mabye then a UDP connection system for
+id like to add a tilemap and mabye then a UDP connection system.
 
 #### complie with {will be making a make file soon}
 
-new complie line: g++ -std=c++17 main_ship.cpp ships.cpp ship_factory.cpp game_borad.cpp agent_act.cpp -o ship_out
+new complie line: g++ -std=c++17 main_ship.cpp ships.cpp ship_factory.cpp game_borad.cpp agent_act.cpp agent_sensor_memorx.cpp -o ship_out
+
+
 
 old:
  g++ -std=c++17 main_ship.cpp ships.cpp ship_factory.cpp game_borad.cpp  -o ship_out
