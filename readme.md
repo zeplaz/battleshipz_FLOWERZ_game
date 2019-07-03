@@ -10,7 +10,11 @@
 ### OGINZ_;
 found somone marc_s on stackoverflow makeing alittle game they had a few functions and a bunch of global vars but sitin in some main. it basicly did not do much. and was  more of a outline  ... i decided to make redo almost all of it, into a c++ class system, and  make it work.and make a proper little game, this is not done, i;ll likely work on it more as i feel like it kinda fun to build alittle bits from random somthing found.
 
-i made a game board class, and add in ships classes, and a factory settup, and started to devlope the computer compoente setup.
+i produced a game game board class, and add in ships classes, and a factory settup, and started to devlope the computer compoente setup expanded to a number of compoents, and layers of information restriction and passage to build up telemitary.. and design..
+
+complie with {will be making a make file soon}
+
+new complie line: g++ -std=c++17 main_ship.cpp ships.cpp ship_factory.cpp game_borad.cpp agent_act.cpp agent_sensor_memorx.cpp -o ship_out
 
 
 ### intent:
